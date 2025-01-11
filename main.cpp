@@ -18,7 +18,7 @@ int main() {
     manager.listTasksByPriority();
      */
 
-    cout << "Welcome to the To-Do Application by Cyril D. Tchouta-Moussa with A LOT of help" << endl <<
+    cout << "Welcome to the To-Do Application by Cyril D. Tchouta-Moussa with A LOT of help!" << endl <<
          "----------------------------------------------------------------------------------" << endl;
 
     FileManager Manager;
