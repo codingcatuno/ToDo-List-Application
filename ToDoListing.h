@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
+#include <cstdio>
 #include "json.hpp"
 
 using json = nlohmann::json;
@@ -47,9 +48,11 @@ public:
     ~FileManager();
 
     void print();
-    std::string fileNameUpdate(std::string& fileName); //work on I couldnt figure this out at the time but there are two test json files
+    void fileNameUpdate(TaskManager& mainFile,std::string& fileName); //work on I couldnt figure this out at the time but there are two test json files
+    bool checkFileName(std::string& fileName);
+    void deleteFile(std::string& fileName);  // Make it so that it also deletes the line in the directory file
+
 // Function to check filename input and make sure its valid then move it to the taskmanager class via setter
-// function that deletes whole file and removes it from the .txt file
 
 // create function that handles a non-existing file
 /* handle making it so when one files open the rest close off
@@ -59,5 +62,7 @@ public:
 */
 
 };
+
+void logclear();
 
 #endif //TODO_LIST_APPLICATION_TODOLISTING_H

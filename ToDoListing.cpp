@@ -4,6 +4,11 @@
 
 //
 // Created by Owner on 1/1/2025.
+void logclear(){
+    for (int i = 0; i < 50;++i){
+        std::cout << std::endl;
+    }}
+
 TaskManager::TaskManager(std::string filename) {
     this->filename = filename;
     loadTasks();
@@ -134,17 +139,26 @@ void TaskManager::deleteTaskByName(const std::string& taskName){
 }
 
 void TaskManager::deleteAllTasks() {
+    std::string confirmation;
     if (tasks.empty()){
         std::cerr << "No tasks to delete :/" << std::endl;
     } else {
-        tasks.clear();
-        saveTasks();
-        std::cout << "All tasks have successfully been deleted!\n";
+        std::cout << "YOU ARE ABOUT TO DELETE ALL YOUR TASKS IN THIS FILE\n"
+                  << "Type in \"CONFIRM\" to continue: ";
+        std::cin >> confirmation;
+        logclear();
+        if (confirmation == "CONFIRM"){
+            tasks.clear();
+            saveTasks();
+            std::cout << "All tasks have successfully been deleted!\n";
+        } else{
+            std::cout << "All tasks deletion has been prevented!\n";
+        }
     }
 }
 
-void TaskManager::setFilename(const std::string &filename) {
-    TaskManager::filename = filename;
+void TaskManager::setFilename(const std::string &fn) {
+    TaskManager::filename = fn;
     loadTasks();
 }
 
@@ -155,11 +169,6 @@ managerFile = "FileManagerFile.txt";
 }
 
 FileManager::~FileManager()= default;
-
-std::string FileManager::fileNameUpdate(std::string &fileName) {
-
-    return std::string();
-}
 
 void FileManager::print() {
     std::ifstream ioFile(managerFile);
@@ -179,5 +188,97 @@ void FileManager::print() {
         ioFile.close();
     }else{
         std::cout << "Unable to open FileManager Directory :/, If you remember the Task File Name try inputing it." << std::endl;
+    }
+}
+
+void FileManager::fileNameUpdate(TaskManager& mainFile,std::string& fileName) {
+    // 1 check directory to see if file is already there and if not add file name to the FileManagerFile.txt
+    // 2 change the filename in the taskmanager class with the setter
+
+    // 1
+    if (!checkFileName(fileName)){
+        std::ofstream outputFile(managerFile, std::ios::app);
+        if (outputFile.is_open()) {
+            outputFile << fileName << "\n"; // Append new file to the file
+            outputFile.close();
+            std::cout << "New file Successfully Added!\n";
+        } else{
+            std::cerr << "Failed to open file." << std::endl;
+        }
+    } else {
+     std::cout << "Accessing \"" << fileName << "\"..." << std::endl;
+    }
+    // 2
+    mainFile.setFilename(fileName);
+}
+
+bool FileManager::checkFileName(std::string &fileName) {
+    std::ifstream inputFile(managerFile);
+    std::string line;
+    const std::string& target = fileName;
+
+    if (inputFile.is_open()){
+        while (std::getline(inputFile,line)){ // Read file line by line
+            if(line == target){                      // Compare each line with the target
+                inputFile.close();
+                return true;
+            }
+        }
+    } else{
+        std::cerr << "Failed to open the file." << std::endl;
+    }
+    return false;
+}
+
+void FileManager::deleteFile(std::string &fileName) {
+    std::string confirmation;
+    if (!checkFileName(fileName)){
+        std::cerr << "File does NOT exist! :/" << std::endl;
+        return;
+    }
+    std::cout << "YOU ARE ABOUT TO DELETE THIS FILE\n"
+                << "Type in \"CONFIRM\" to continue: ";
+    std::cin >> confirmation;
+    logclear();
+    if (confirmation == "CONFIRM"){
+        std::cout << "File has successfully been deleted!\n";
+    } else{
+        std::cout << "File deletion has been prevented!\n";
+        return;
+    }
+    const std::string& target = fileName;
+    std::string tempFileName = "temp.txt";
+
+    std::ifstream inputFile(managerFile);
+    std::ofstream tempFile(tempFileName);
+
+    if (!inputFile.is_open() || !tempFile.is_open()){
+        std::cerr << "Could not open files." << std::endl;
+    }
+
+    std::string line;
+    while (std::getline(inputFile,line)){
+        if(line != target){
+            tempFile << line << "\n";
+        }
+    }
+
+    inputFile.close();
+    tempFile.close();
+
+    if (std::remove(managerFile.c_str()) != 0){
+        std::cerr << "Error deleting original FileManagerFile.txt" << std::endl;
+        return;
+    }
+
+    if (std::rename(tempFileName.c_str(), managerFile.c_str()) != 0){
+        std::cerr << "Error renaming temp to original" << std::endl;
+        return;
+    }
+
+    if (std::remove(fileName.c_str()) == 0){
+        std::cout << "File successfully deleted." << std::endl;
+    } else {
+        std::cerr << "Error: File could not be deleted." << std::endl;
     }
 }
