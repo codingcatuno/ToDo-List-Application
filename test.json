@@ -1,1 +1,7 @@
-[]
+[
+    {
+        "due_date": "01-05-2025",
+        "priority": "High",
+        "task": "Clean kitchen"
+    }
+]

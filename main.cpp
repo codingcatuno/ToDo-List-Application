@@ -23,7 +23,12 @@ int main() {
 
     FileManager Manager;
     Manager.print();
-    //TaskManager file1("test.json");
+
+    TaskManager mainFile("test.json");
+    mainFile.setFilename("test2.json");
+
+    //mainFile.addTask("Call doctor","Medium", "01-05-2025");
+    mainFile.listTasksByPriority();
 
     //file1.addTask("Clean kitchen", "High", "01-05-2025");
     //file1.listTasksByPriority();

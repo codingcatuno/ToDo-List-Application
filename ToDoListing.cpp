@@ -10,6 +10,11 @@ TaskManager::TaskManager(std::string filename) {
     listTasksByPriority();
 }
 
+
+TaskManager::TaskManager() = default;
+
+TaskManager::~TaskManager() = default;
+
 void TaskManager::saveTasks() const {
     std::ofstream outputFile(filename);
     if (!fs::exists(filename)){
@@ -37,7 +42,7 @@ const json &TaskManager::getTasks() const {
 
 void TaskManager::listTasksByPriority() const {
     if(tasks.empty()){
-        std::cerr << "There are NO tasks left ! :)" << std::endl;
+        std::cout << "There are NO tasks left ! :)" << std::endl;
     }
     else {
         for (const auto &task: tasks) {
@@ -88,22 +93,25 @@ void TaskManager::loadTasks() {
             return;
         }*/
         try{
+            if (!tasks.empty()){
+               tasks = json::array(); // Resets tasks to an empty array if tasks are in it
+            }
             inputFile >> tasks;
             std::cout << "File has successfully opened!\nTasks loaded successfully from " << filename << "\n";
         } catch (const std::exception& e){
-            std::cerr << "File has sucessfully opened!\nError loading tasks: " << e.what() << "\n";
+            std::cout << "File has sucessfully opened!\nError loading tasks: " << e.what() << "\n";
             tasks = json::array(); // Reset tasks to an empty array
         }
         inputFile.close();
     } else{
         std::ofstream outputFile(filename);
         if (outputFile.is_open()){
-            std::cerr << "Could not open file " << filename << ". Starting new file with empty task list. \n";
+            std::cout << "Could not open file " << filename << ". Starting new file with empty task list. \n";
             tasks = json::array(); // Starts empty task list if file can't be opened
             outputFile.close();
             saveTasks();
         }else{
-            std::cerr << "Error opening file & creating new file. :/\n";
+            std::cout << "Error opening file & creating new file. :/\n";
         }
     }
 }
@@ -135,7 +143,10 @@ void TaskManager::deleteAllTasks() {
     }
 }
 
-TaskManager::~TaskManager() = default;
+void TaskManager::setFilename(const std::string &filename) {
+    TaskManager::filename = filename;
+    loadTasks();
+}
 
 // File Manager Class
 
@@ -144,6 +155,11 @@ managerFile = "FileManagerFile.txt";
 }
 
 FileManager::~FileManager()= default;
+
+std::string FileManager::fileNameUpdate(std::string &fileName) {
+
+    return std::string();
+}
 
 void FileManager::print() {
     std::ifstream ioFile(managerFile);

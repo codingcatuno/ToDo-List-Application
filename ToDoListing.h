@@ -19,7 +19,11 @@ private:
     json tasks;
     std::string filename;
 public:
+    void setFilename(const std::string &filename);
+
+public:
     TaskManager(std::string filename);
+    TaskManager();
     ~TaskManager();
 
     const json &getTasks() const;
@@ -31,7 +35,6 @@ public:
     void loadTasks();
     void deleteTaskByName(const std::string& taskName);
     void deleteAllTasks();
-    // Create function that clears tasks array when a different file is inputed
     // function that creates file
 };
 
@@ -44,8 +47,8 @@ public:
     ~FileManager();
 
     void print();
-// Function that opens .txt file that stores json filenames
-// Function to check filename input and make sure its valid then move it to the taskmanager class via getter
+    std::string fileNameUpdate(std::string& fileName); //work on I couldnt figure this out at the time but there are two test json files
+// Function to check filename input and make sure its valid then move it to the taskmanager class via setter
 // function that deletes whole file and removes it from the .txt file
 
 // create function that handles a non-existing file
