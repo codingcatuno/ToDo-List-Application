@@ -1,3 +1,0 @@
-C:/Users/Owner/CLionProjects/!Projects/ToDo-List-Application/cmake-build-debug/CMakeFiles/ToDo_List_Application.dir
-C:/Users/Owner/CLionProjects/!Projects/ToDo-List-Application/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Owner/CLionProjects/!Projects/ToDo-List-Application/cmake-build-debug/CMakeFiles/rebuild_cache.dir
