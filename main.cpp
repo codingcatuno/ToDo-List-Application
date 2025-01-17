@@ -24,8 +24,11 @@ int main() {
     TaskManager mainFileCtrl;
     FileManager manager;
 
-    cout << "Welcome to the To-Do Application by Cyril D. Tchouta-Moussa with the help of Documentation and Stack Overflow" << endl;
-    cout << "----------------------------------------------------------------------------------------------------------------" << endl;
+    cout << "Welcome to the To-Do Application by Cyril D. Tchouta-Moussa with the help of Documentation and Stack Overflow\n";
+    cout << "                                     !Read the README File for Instructions!                                             \n";
+    cout << "----------------------------------------------------------------------------------------------------------------\n" << endl;
+    system("Pause");
+    logclear();
 
     while (userIntInput != 5){
 
