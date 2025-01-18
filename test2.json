@@ -1,12 +1,7 @@
 [
     {
-        "due_date": "01-05-2025",
-        "priority": "Medium",
-        "task": "Call doctor"
-    },
-    {
-        "due_date": "01-22-2025",
-        "priority": "High",
-        "task": "Buy grocieres"
+        "due_date": "04-22-2025",
+        "priority": "Low",
+        "task": "Lil Yacht concert"
     }
 ]

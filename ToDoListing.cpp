@@ -89,6 +89,16 @@ void TaskManager::edit(const std::string& oldTask, const std::string& newTask, c
     std::cout << "Task not found: " << oldTask << "\n";
 }
 
+bool TaskManager::checkFoundTask(const std::string& oldTask) {
+    for (auto& task : tasks){
+        if (task["task"] == oldTask){
+            return true;
+        }
+    }
+    // If task is not found
+    return false;
+}
+
 void TaskManager::loadTasks() {
     std:: ifstream inputFile(filename);
     if (inputFile.is_open()){
@@ -160,6 +170,14 @@ void TaskManager::deleteAllTasks() {
 void TaskManager::setFilename(const std::string &fn) {
     TaskManager::filename = fn;
     loadTasks();
+}
+
+bool TaskManager::checkEmpty() {
+    if (tasks.empty()){
+        return true;
+    } else {
+    return false;
+    }
 }
 
 // File Manager Class

@@ -36,6 +36,8 @@ public:
     void loadTasks();
     void deleteTaskByName(const std::string& taskName);
     void deleteAllTasks();
+    bool checkEmpty();
+    bool checkFoundTask(const std::string& oldTask);
     // function that creates file
 };
 
@@ -48,7 +50,7 @@ public:
     ~FileManager();
 
     void print();
-    void fileNameUpdate(TaskManager& mainFile,std::string& fileName); //work on I couldnt figure this out at the time but there are two test json files
+    void fileNameUpdate(TaskManager& mainFile,std::string& fileName); // work on I couldnt figure this out at the time but there are two test json files
     bool checkFileName(std::string& fileName);
     void deleteFile(std::string& fileName);  // Make it so that it also deletes the line in the directory file
 
