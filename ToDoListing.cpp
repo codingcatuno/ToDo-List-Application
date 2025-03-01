@@ -173,11 +173,7 @@ void TaskManager::setFilename(const std::string &fn) {
 }
 
 bool TaskManager::checkEmpty() {
-    if (tasks.empty()){
-        return true;
-    } else {
-    return false;
-    }
+    return tasks.empty();
 }
 
 // File Manager Class

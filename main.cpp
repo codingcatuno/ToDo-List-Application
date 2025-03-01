@@ -5,18 +5,22 @@
 #include <string>
 #include "ToDoListing.h"
 
-/* TaskManager manager("taskfile.json");
-   manager.addTask("Buy groceries", "Medium", "2025-01-03");
-   manager.addTask("Call cousin", "High", "2025-01-04");
-   manager.addTask("Send money to UBER", "Low", "2025-01-04");
-
-   manager.listTasksByPriority();
-   manager.edit("Call cousin", "Call Mother", "Low", "2025-01-05");
-   manager.listTasksByPriority();
-    */
-
 using namespace std;
 
+/*
+ *
+ * Devloper comments
+ * -----------------
+ *  Everything looks good, probably gonna be updates in the future but for now just
+ *   make sure to add comment to things especially the functions so its readable to not only you
+ *   but also others who will use your code. :)
+
+ *   02/19/2025: Work to do is to comment everything then after that commit it to GitHub then
+ *   finish working on the README. After that this project will be completed
+
+ *   From there make sure that you work on the other projects while completing the course
+ *   (in respects to what you know and don't know).
+ */ 
 
 int main() {
     int userIntInput;
@@ -41,7 +45,7 @@ int main() {
              << "-------------------------------------------------------------------" << endl;
         manager.print();
         cout << "--------------------------------------" << endl;
-        cout << "Option 1: Open a File\n"
+        cout << "Option 1: Open/Add a File\n"
              << "Option 2: Delete File\n"
              << "*COMING SOON* Option 3: EDIT\n"
                 "Option 5: Quit\n\n";
@@ -247,7 +251,7 @@ int main() {
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(),'\n');
                             cout << "WARNING DELETING TASK!" << endl;
-                            cout << "Type the Task you'd like to delete Identically: ";
+                            cout << "Type the Task you'd like to delete Identically: " << endl;
                             cout << "----------------------------------------------------------------------------------------------" << endl;
                             mainFileCtrl.listTasksByPriority();
                             getline(cin, deleteTask);
@@ -313,23 +317,7 @@ int main() {
                 break;
             }
         }
-        //system("pause");
     }
-
     cout << "Thank you for using my To-Do List Application! :)" << endl;
-
-    /* system("Pause");
-
-    currentFile = "test.json";
-
-    manager.fileNameUpdate(mainFileCtrl,currentFile);
-
-    mainFileCtrl.listTasksByPriority();
-
-   // currentFile = "test2.json";
-   // manager.fileNameUpdate(mainFileCtrl, currentFile);
-   // manager.deleteFile(currentFile);
-
-    manager.print(); */
     return 0;
 }
